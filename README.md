@@ -41,6 +41,9 @@ O público-alvo do aplicativo são mulheres que enfrentam a maternidade de forma
 - **Relato de Incidentes (Gravação de Áudio + Localização):** Permite gravar relatos de violência ou situações de risco, armazenando local e data.
 - **Modo Discreto (Sensor de movimento ou gesto secreto):** Ativa o modo de segurança ou esconde o app com um gesto específico.
 
+## Tecnologias Utilizadas
+Este projeto será desenvolvido utilizando o **Flutter**, um framework de código aberto para a criação de aplicativos multiplataforma (iOS, Android, Web e Desktop). O Flutter foi escolhido por sua eficiência, desempenho e facilidade de desenvolvimento.
+
 ## Equipe
 - Erick Silva
 - Denilson Carneiro
