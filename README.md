@@ -1,12 +1,12 @@
-# Aplicativo de Apoio a Mães Solo
+# 👩‍👧 Aplicativo de Apoio a Mães Solo
 
-## Descrição do Projeto
+## 📝 Descrição do Projeto
 Este projeto consiste no desenvolvimento de um aplicativo voltado para fornecer suporte informativo, prático e emocional para mulheres que são mães solo. O objetivo é atender a demandas sociais reais, oferecendo acesso rápido e organizado a informações legais, benefícios sociais, recursos de segurança e uma comunidade de apoio.
 
-## Público-Alvo
+## 🎯 Público-Alvo
 O público-alvo do aplicativo são mulheres que enfrentam a maternidade de forma solo, especialmente aquelas em situação de vulnerabilidade social, em processos de separação ou que sofreram ou sofrem violência doméstica.
 
-## Funcionalidades
+## 🔧 Funcionalidades
 ### 1. Informações e Direitos
 - Direitos das mães solo (licença maternidade, guarda, pensão, prioridade em creches, etc.).
 - Direitos em caso de divórcio/separação.
@@ -36,23 +36,23 @@ O público-alvo do aplicativo são mulheres que enfrentam a maternidade de forma
 - Acesso com senha ou biometria.
 - Modo discreto (ícone e nome do app disfarçado).
 
-## Funcionalidades com APIs Nativas
+## 📲 Funcionalidades com APIs Nativas
 - **Mapa de Locais de Apoio (GPS + API de mapas):** Mostra a localização da usuária e pontos próximos como Delegacia da Mulher, CRAS, ONGs, creches públicas.
 - **Relato de Incidentes (Gravação de Áudio + Localização):** Permite gravar relatos de violência ou situações de risco, armazenando local e data.
 - **Modo Discreto (Sensor de movimento ou gesto secreto):** Ativa o modo de segurança ou esconde o app com um gesto específico.
 
-## Tecnologias Utilizadas
+## 🛠️ Tecnologias Utilizadas
 Este projeto será desenvolvido utilizando o **Flutter**, um framework de código aberto para a criação de aplicativos multiplataforma (iOS, Android, Web e Desktop). O Flutter foi escolhido por sua eficiência, desempenho e facilidade de desenvolvimento.
 
-## Equipe
+## 🧑‍💻 Equipe
 - Erick Silva
 - Denilson Carneiro
 - Rafaela Neves
 - Hanna Sabrynna
 - Matheus Silva
 
-## Como Contribuir
+## 🤝 Como Contribuir
 Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests.
 
-## Licença
+## 📄 Licença
 Este projeto está sob a licença MIT.
