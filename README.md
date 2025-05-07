@@ -1,5 +1,4 @@
-# 👩‍👧 Aplicativo de Apoio a Mães Solo
-
+# 👩‍👧 EloMãe
 ## 📝 Descrição do Projeto
 Este projeto consiste no desenvolvimento de um aplicativo voltado para fornecer suporte informativo, prático e emocional para mulheres que são mães solo. O objetivo é atender a demandas sociais reais, oferecendo acesso rápido e organizado a informações legais, benefícios sociais, recursos de segurança e uma comunidade de apoio.
 
