@@ -43,5 +43,15 @@ O público-alvo do aplicativo são mulheres que enfrentam a maternidade de forma
 ## 🛠️ Tecnologias Utilizadas
 Este projeto será desenvolvido utilizando o **Flutter**, um framework de código aberto para a criação de aplicativos multiplataforma (iOS, Android, Web e Desktop). O Flutter foi escolhido por sua eficiência, desempenho e facilidade de desenvolvimento.
 
+## 🧑‍💻 Equipe
+- [Denilson Carneiro](https://github.com/Denils0n)
+- [Erick Silva](https://github.com/ErickSilva-s)
+- [Hanna Sabrynna](https://github.com/hannasabrynna)
+- [Rafaela Neves](https://github.com/rafxhs)
+- [Matheus Silva](https://github.com/V1niciusmv)
+
+## 🤝 Como Contribuir
+Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests.
+
 ## 📄 Licença
 Este projeto está sob a licença MIT.
