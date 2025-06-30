@@ -33,7 +33,7 @@ O público-alvo do aplicativo são mulheres que enfrentam a maternidade de forma
 
 ## 📲 Funcionalidades com APIs Nativas
 - **Mapa de Locais de Apoio (GPS + API de mapas):** Mostra a localização da usuária e pontos próximos como Delegacia da Mulher, CRAS, ONGs, creches públicas.
-- **Calendário para criação de lembretes (API de calendário local + notificações): Integração com a agenda do dispositivo para organizar compromissos com alertas e visualização por semana/mês.
+- **Calendário para criação de lembretes (API de calendário local + notificações):** Integração com a agenda do dispositivo para organizar compromissos com alertas e visualização por semana/mês.
 - **Comunidade com comunicação entre mães (Gravação de Áudio + Envio de Fotos):** Permite gravação de áudio e envio de imagens nos chats das comunidades.
 
 ## 🛠️ Tecnologias Utilizadas
