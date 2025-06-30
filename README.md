@@ -3,7 +3,7 @@
 Este projeto consiste no desenvolvimento de um aplicativo voltado para fornecer suporte informativo, prático e emocional para mulheres que são mães solo. O objetivo é atender a demandas sociais reais, oferecendo acesso rápido e organizado a informações legais, benefícios sociais, recursos de segurança e uma comunidade de apoio.
 
 ## 🎯 Público-Alvo
-O público-alvo do aplicativo são mulheres que enfrentam a maternidade de forma solo, especialmente aquelas em situação de vulnerabilidade social, em processos de separação ou que sofreram ou sofrem violência doméstica.
+O público-alvo do aplicativo são mulheres que enfrentam a maternidade de forma solo, especialmente aquelas em situação de vulnerabilidade social.
 
 ## 🔧 Funcionalidades
 ### 1. Informações e Direitos
