@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:elomae/app/models/onboard_model.dart';
 import 'package:elomae/app/view_models/onboarding_viewmodel.dart';
@@ -53,7 +54,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               width: 170,
                               height: 48,
                               child: ElevatedButton(
-                                onPressed: viewModel.nextPage,
+                                onPressed: () => GoRouter.of(context).push('/welcome'), //Ou pode tbm utilizar apenas "context.push('/caminho')"
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color(0xFF8566E0),
                                   foregroundColor: Colors.white,
