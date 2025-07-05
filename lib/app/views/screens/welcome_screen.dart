@@ -29,7 +29,7 @@ class WelcomeScreen extends StatelessWidget {
                     width: 340,
                     height: 48,
                     child: ElevatedButton(
-                      onPressed: () => GoRouter.of(context).push('/login'),
+                      onPressed: () => GoRouter.of(context).push('/database'),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF8566E0),
                         foregroundColor: Colors.white,
