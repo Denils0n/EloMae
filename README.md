@@ -32,9 +32,11 @@ O público-alvo do aplicativo são mulheres que enfrentam a maternidade de forma
 - Bloqueio e denúncia de usuários nas comunidades.
 
 ## 📲 Funcionalidades com APIs Nativas
-- **Mapa de Locais de Apoio (GPS + API de mapas):** Mostra a localização da usuária e pontos próximos como Delegacia da Mulher, CRAS, ONGs, creches públicas.
+- **Mapa de Locais de Apoio (GPS + API Leaflet para o mapa):** Mostra a localização da usuária e pontos próximos como Delegacia da Mulher, CRAS, ONGs, creches públicas.
 - **Calendário para criação de lembretes (API de calendário local + notificações):** Integração com a agenda do dispositivo para organizar compromissos com alertas e visualização por semana/mês.
 - **Comunidade com comunicação entre mães (Gravação de Áudio + Envio de Fotos):** Permite gravação de áudio e envio de imagens nos chats das comunidades.
+- **Notificações Locais (Flutter Local Notifications):** Recebimento de notificações dos lembretes do calendário, respostas nos chats das comunidades e de novas informações da plataforma.
+- **Sensor de Biometria (Flutter Local Auth):** Proteger o acesso ao aplicativo.
 
 ## 🛠️ Tecnologias Utilizadas
 Este projeto será desenvolvido utilizando o **Flutter**, um framework de código aberto para a criação de aplicativos multiplataforma (iOS, Android, Web e Desktop). O Flutter foi escolhido por sua eficiência, desempenho e facilidade de desenvolvimento.
