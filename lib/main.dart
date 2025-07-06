@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'EloMãe',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Color(0xffFAFAFA)),
       ),
       routerDelegate: routes.routerDelegate,
       routeInformationParser: routes.routeInformationParser,

@@ -37,6 +37,6 @@ final List<OnboardModel> demo_data = [
     image: 'assets/images/onboarding/image1.svg',
     title: 'Acolhimento, apoio e informação',
     description:
-        'Com o EloMãe, você tem uma plataforma feita para entender, ouvir e ajudar. Seu caminho começa aqui.',
+        'Com o Elo Mãe, você tem uma plataforma feita para entender, ouvir e ajudar. Construindo rede, força e acolhimento.',
   ),
 ];

@@ -21,6 +21,7 @@ class WelcomeScreen extends StatelessWidget {
               Text(
                 'Encontre apoio, informação e uma comunidade segura para caminhar junto com você.',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal),
+                textAlign: TextAlign.justify,
               ),
               const SizedBox(height: 20),
               Column(
@@ -29,7 +30,7 @@ class WelcomeScreen extends StatelessWidget {
                     width: 340,
                     height: 48,
                     child: ElevatedButton(
-                      onPressed: () => GoRouter.of(context).push('/database'),
+                      onPressed: () => GoRouter.of(context).push('/register'),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF8566E0),
                         foregroundColor: Colors.white,
