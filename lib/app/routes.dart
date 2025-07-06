@@ -4,14 +4,31 @@ import 'package:elomae/app/views/screens/welcome_screen.dart';
 import 'package:elomae/app/views/screens/login_screen.dart';
 import 'package:elomae/app/views/screens/register_screen.dart';
 import 'package:elomae/app/views/screens/database_screen.dart';
+import 'package:elomae/app/views/screens/map_screen.dart';
 
 final GoRouter routes = GoRouter(
   initialLocation: '/onboard',
   routes: [
-    GoRoute(path: '/onboard', builder: (context, state) => const OnboardingScreen()),
-    GoRoute(path: '/welcome', builder: (context, state) => const WelcomeScreen()),
+    GoRoute(
+      path: '/onboard',
+      builder: (context, state) => const OnboardingScreen(),
+    ),
+    GoRoute(
+      path: '/welcome',
+      builder: (context, state) => const WelcomeScreen(),
+    ),
     GoRoute(path: '/login', builder: (context, state) => const LoginScreen()),
-    GoRoute(path: '/register', builder: (context, state) => const RegisterScreen()),
-    GoRoute(path: '/database', builder: (context, state) => const FirestoreExample()),
+    GoRoute(
+      path: '/register',
+      builder: (context, state) => const RegisterScreen(),
+    ),
+    GoRoute(
+      path: '/database',
+      builder: (context, state) => const FirestoreExample(),
+    ),
+    GoRoute(
+      path: '/map',
+      builder: (context, state) => const SupportPlacesMap(),
+    ),
   ],
 );
