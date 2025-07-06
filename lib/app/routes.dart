@@ -3,6 +3,7 @@ import 'package:elomae/app/views/screens/onboarding_screen.dart';
 import 'package:elomae/app/views/screens/welcome_screen.dart';
 import 'package:elomae/app/views/screens/login_screen.dart';
 import 'package:elomae/app/views/screens/register_screen.dart';
+import 'package:elomae/app/views/screens/forgot_password_screen.dart';
 import 'package:elomae/app/views/screens/database_screen.dart';
 
 final GoRouter routes = GoRouter(
@@ -12,6 +13,7 @@ final GoRouter routes = GoRouter(
     GoRoute(path: '/welcome', builder: (context, state) => const WelcomeScreen()),
     GoRoute(path: '/login', builder: (context, state) => const LoginScreen()),
     GoRoute(path: '/register', builder: (context, state) => const RegisterScreen()),
+    GoRoute(path: '/forgot_password', builder: (context, state) => const ForgotPasswordScreen()),
     GoRoute(path: '/database', builder: (context, state) => const FirestoreExample()),
   ],
 );
