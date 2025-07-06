@@ -1,3 +1,4 @@
+import 'package:elomae/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:elomae/app/models/user_model.dart';
@@ -15,7 +16,9 @@ class _RegisterScreen extends State<RegisterScreen> {
   final validator = UserValidator();
   final formKey = GlobalKey<FormState>();
 
-  bool isValid(){
+  AuthService _authService = AuthService();
+
+  bool isValid() {
     final result = validator.validate(credentials);
     return result.isValid;
   }
@@ -66,7 +69,7 @@ class _RegisterScreen extends State<RegisterScreen> {
                   TextFormField(
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     onChanged: credentials.setName,
-                    validator: validator.byField(credentials, 'name'),
+                    // validator: validator.byField(credentials, 'name'),
                     // Na documentacao mostra esse jeito que serve como um "required"
                     // validator: (value) {
                     //   if (value == null || value.isEmpty) {
@@ -104,7 +107,7 @@ class _RegisterScreen extends State<RegisterScreen> {
                   ),
                   TextFormField(
                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                    onChanged: credentials.setName,
+                    onChanged: credentials.setEmail,
                     validator: validator.byField(credentials, 'email'),
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
@@ -136,7 +139,7 @@ class _RegisterScreen extends State<RegisterScreen> {
                   ),
                   TextFormField(
                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                    onChanged: credentials.setName,
+                    onChanged: credentials.setNumber,
                     validator: validator.byField(credentials, 'number'),
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
@@ -168,7 +171,7 @@ class _RegisterScreen extends State<RegisterScreen> {
                   ),
                   TextFormField(
                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                    onChanged: credentials.setName,
+                    onChanged: credentials.setPassword,
                     validator: validator.byField(credentials, 'password'),
                     obscureText: true,
                     decoration: InputDecoration(
@@ -197,13 +200,17 @@ class _RegisterScreen extends State<RegisterScreen> {
                             return ElevatedButton(
                               onPressed: () {
                                 //GoRouter.of(context).push('/login'); //por enquanto que não tem autenticação, vou direcionar para a tela de login.
-                                formKey.currentState?.validate();
+                               if (formKey.currentState!.validate()) {
+                                  botaoClicado();
+                                } else {
+                                  print('Formulário inválido');
+                                }
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color(0xFF8566E0),
                                 foregroundColor: Colors.white,
                               ),
-                              child: const Text(
+                              child: Text(
                                 'Criar Conta',
                                 style: TextStyle(
                                   color: Colors.white,
@@ -212,10 +219,10 @@ class _RegisterScreen extends State<RegisterScreen> {
                                 ),
                               ),
                             );
-                          }
+                          },
                         ),
                       );
-                    }
+                    },
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -242,4 +249,21 @@ class _RegisterScreen extends State<RegisterScreen> {
       ),
     );
   }
+
+botaoClicado() {
+  if (formKey.currentState!.validate()) {
+    print('Registro');
+    print("Email: ${credentials.email}, Nome: ${credentials.name}, Número: ${credentials.number}");
+
+    _authService.UserRegister(
+      name: credentials.name,
+      number: credentials.number,
+      email: credentials.email,
+      password: credentials.password,
+    );
+    GoRouter.of(context).push('/login'); // Redireciona para a tela de login por enquanto 
+  } else {
+    print('Formulário inválido');
+  }
+}
 }
