@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:elomae/app/models/user_model.dart';
 import 'package:elomae/app/utils/validators/user_validator.dart';
+import 'package:elomae/services/auth_service.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreen();
-
 }
 
 class _LoginScreen extends State<LoginScreen> {
@@ -56,7 +56,7 @@ class _LoginScreen extends State<LoginScreen> {
                     child: Padding(
                       padding: EdgeInsets.only(left: 10, bottom: 10),
                       child: Text(
-                        'Número',
+                        'Email',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
@@ -66,8 +66,8 @@ class _LoginScreen extends State<LoginScreen> {
                   ),
                   TextFormField(
                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                    onChanged: credentials.setName,
-                    validator: validator.byField(credentials, 'number'),
+                    onChanged: credentials.setEmail,
+                    validator: validator.byField(credentials, 'email'),
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
@@ -75,7 +75,7 @@ class _LoginScreen extends State<LoginScreen> {
                       ),
                       filled: true,
                       fillColor: Color(0xFFECECEC),
-                      hintText: '(DDD) 00000 - 0000',
+                      hintText: 'Ex: marialuiza@gmail.com',
                       hintStyle: TextStyle(
                         color: Color(0xff838383),
                         fontSize: 16,
@@ -98,7 +98,7 @@ class _LoginScreen extends State<LoginScreen> {
                   ),
                   TextFormField(
                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                    onChanged: credentials.setName,
+                    onChanged: credentials.setPassword,
                     validator: validator.byField(credentials, 'password'),
                     obscureText: true,
                     decoration: InputDecoration(
@@ -119,7 +119,8 @@ class _LoginScreen extends State<LoginScreen> {
                   Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
-                      onPressed: () => GoRouter.of(context).push('/forgot_password'),
+                      onPressed: () =>
+                          GoRouter.of(context).push('/forgot_password'),
                       child: Text(
                         'Esqueci a minha senha',
                         style: TextStyle(
@@ -138,9 +139,22 @@ class _LoginScreen extends State<LoginScreen> {
                         width: 340,
                         height: 48,
                         child: ElevatedButton(
-                          onPressed: () {
-                            GoRouter.of(context).push('/home'); //falta adicionar a lógica da autenticação
-                            //formKey.currentState?.validate();
+                          onPressed: () async {
+                            if (formKey.currentState!.validate()) {
+                              final authService = AuthService();
+                              final result = await authService.loginUser(
+                                email: credentials.email,
+                                password: credentials.password,
+                              );
+
+                              if (result == null) {
+                                GoRouter.of(context).go('/home');
+                              } else {
+                                ScaffoldMessenger.of(
+                                  context,
+                                ).showSnackBar(SnackBar(content: Text(result)));
+                              }
+                            }
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF8566E0),
@@ -156,7 +170,7 @@ class _LoginScreen extends State<LoginScreen> {
                           ),
                         ),
                       );
-                    }
+                    },
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -186,6 +200,4 @@ class _LoginScreen extends State<LoginScreen> {
       ),
     );
   }
-
-
 }
