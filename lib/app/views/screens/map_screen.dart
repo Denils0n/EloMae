@@ -1,9 +1,12 @@
 import 'dart:convert';
+import 'package:elomae/app/view_models/place_search_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
+import 'package:elomae/app/models/place_info_model.dart';
+import 'package:elomae/app/views/screens/place_details_screen.dart';
 
 class SupportPlacesMap extends StatefulWidget {
   const SupportPlacesMap({super.key});
@@ -80,19 +83,35 @@ class _SupportPlacesMapState extends State<SupportPlacesMap> {
         ).toList();
       });
 
-      for (final item in data) {
+            for (final item in data) {
         final lat = double.tryParse(item['lat'] ?? '');
         final lon = double.tryParse(item['lon'] ?? '');
-        final nome = item['display_name'] ?? query;
+        // final nome = item['display_name'] ?? query;
 
         if (lat != null && lon != null) {
+          final place = PlaceInfo.fromJson(item);
+
           setState(() {
             _markers.add(
               Marker(
                 point: LatLng(lat, lon),
-                child: Tooltip(
-                  message: nome,
-                  child: Icon(Icons.location_on, color: const Color.fromARGB(255, 244, 54, 171), size: 32),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PlaceDetailsScreen(place: place),
+                      ),
+                    );
+                  },
+                  child: Tooltip(
+                    message: place.displayName,
+                    child: Icon(
+                      Icons.location_on,
+                      color: const Color.fromARGB(255, 244, 54, 171),
+                      size: 32,
+                    ),
+                  ),
                 ),
               ),
             );
@@ -108,7 +127,6 @@ class _SupportPlacesMapState extends State<SupportPlacesMap> {
       appBar: AppBar(title: Text('Locais de Apoio')),
       body: Column(
         children: [
-          // Barra de pesquisa logo abaixo do título
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
@@ -121,11 +139,10 @@ class _SupportPlacesMapState extends State<SupportPlacesMap> {
               ),
               onChanged: (value) {
                 _searchQuery = value;
-                // _searchByQuery(value); // se quiser buscar em tempo real
               },
               onSubmitted: (value) {
                 _searchQuery = value;
-                _searchByQuery(value); // Busca ao apertar "Pesquisar" no teclado
+                _searchByQuery(value);
               },
               textInputAction: TextInputAction.search,
             ),
