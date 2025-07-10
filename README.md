@@ -9,25 +9,28 @@ O público-alvo do aplicativo são mulheres que enfrentam a maternidade de forma
 ### 1. Informações e Direitos
 - Direitos das mães solo (licença maternidade, guarda, pensão, prioridade em creches, etc.).
 - Benefícios governamentais (Bolsa Família, Auxílio Brasil, creche gratuita, isenções, etc.).
+- Modelos de documentos (guarda, medida protetiva, pensão, etc.).
 
-### 2. Comunidade
+### 2. Comunidades
 - Chat global anônimo.
 - Fórum ou mural de apoio para troca de experiências, desabafos e dicas.
 - Grupos temáticos, como "Mães de primeira viagem", "Empreendedoras", "Mães estudantes", etc.
 - Histórias inspiradoras enviadas por usuárias.
 
-### 3. Recursos Práticos
+### 3. Mapa 
 - Mapa com instituições de apoio (CRAS, Delegacia da Mulher, ONGs, creches públicas, etc.).
-- Modelos de documentos (guarda, medida protetiva, pensão, etc.).
-- Checklist interativo para organização de processos.
-- Agenda ou lembretes para consultas, datas de pagamento de benefício, audiências, etc.
+- Permite pesquisar locais de apoio próximos à localização da usuária.
 
-### 4. Perfil da Usuária
+### 4. Calendário de Lembretes
+- Calendário que permite criar lembretes para consultas médicas, datas de pagamento de benefício, audiências, etc.
+- Recebimento de notificações para notificar lembretes em aberto.
+
+### 5. Perfil da Usuária
 - Cadastro básico (nome, idade, quantos filhos, etc.).
 - Preferências de conteúdo.
 - Histórico de tópicos salvos ou visualizados.
 
-### 5. Segurança
+### 6. Segurança
 - Acesso com senha ou biometria.
 - Bloqueio e denúncia de usuários nas comunidades.
 
