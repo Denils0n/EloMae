@@ -9,15 +9,33 @@ import 'package:elomae/app/views/screens/database_screen.dart';
 import 'package:elomae/app/views/screens/community/community_screen.dart';
 
 final GoRouter routes = GoRouter(
-  initialLocation: '/community',
+  initialLocation: '/onboard',
   routes: [
-    GoRoute(path: '/onboard', builder: (context, state) => const OnboardingScreen()),
-    GoRoute(path: '/welcome', builder: (context, state) => const WelcomeScreen()),
+    GoRoute(
+      path: '/onboard',
+      builder: (context, state) => const OnboardingScreen(),
+    ),
+    GoRoute(
+      path: '/welcome',
+      builder: (context, state) => const WelcomeScreen(),
+    ),
     GoRoute(path: '/login', builder: (context, state) => const LoginScreen()),
-    GoRoute(path: '/register', builder: (context, state) => const RegisterScreen()),
-    GoRoute(path: '/forgot_password', builder: (context, state) => const ForgotPasswordScreen()),
+    GoRoute(
+      path: '/register',
+      builder: (context, state) => const RegisterScreen(),
+    ),
+    GoRoute(
+      path: '/forgot_password',
+      builder: (context, state) => const ForgotPasswordScreen(),
+    ),
     GoRoute(path: '/home', builder: (context, state) => const HomepageScreen()),
-    GoRoute(path: '/database', builder: (context, state) => const FirestoreExample()),
-    GoRoute(path: '/community', builder: (context, state) => const CommunityPageScreen()),
+    GoRoute(
+      path: '/database',
+      builder: (context, state) => const FirestoreExample(),
+    ),
+    GoRoute(
+      path: '/community',
+      builder: (context, state) => const CommunityPageScreen(),
+    ),
   ],
 );
