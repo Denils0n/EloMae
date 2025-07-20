@@ -46,6 +46,8 @@ dependencies:
   #Pacotes para funcionar o mapa
   google_maps_flutter: ^2.5.0
   geolocator: ^11.0.0
+
+  flutter_dotenv: ^5.1.0
   
 
   
