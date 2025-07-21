@@ -32,7 +32,7 @@ class MapViewModel extends ChangeNotifier {
     final apiKey = dotenv.env['GOOGLE_API_KEY'];
 
     final url = Uri.parse(
-        'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$lat,$lng&radius=$radius&keyword=$keyword&key=$apiKey');
+      'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$lat,$lng&radius=$radius&keyword=$keyword&key=$apiKey');
 
     final response = await http.get(url);
 
@@ -43,6 +43,7 @@ class MapViewModel extends ChangeNotifier {
       supportPlaces = results.map<SupportPlace>((place) {
         final location = place['geometry']['location'];
         return SupportPlace(
+          placeId: place['place_id'], // ADICIONADO
           name: place['name'],
           latitude: location['lat'],
           longitude: location['lng'],
@@ -54,5 +55,50 @@ class MapViewModel extends ChangeNotifier {
       print("Erro ao buscar lugares: ${response.body}");
     }
   }
-}
 
+  // NOVA FUNÇÃO: Buscar detalhes completos do local
+  Future<SupportPlace?> fetchPlaceDetails(String placeId) async {
+    final apiKey = dotenv.env['GOOGLE_API_KEY'];
+
+    final url = Uri.parse(
+      'https://maps.googleapis.com/maps/api/place/details/json'
+      '?place_id=$placeId'
+      '&fields=place_id,name,geometry,formatted_address,formatted_phone_number,opening_hours,rating,user_ratings_total,website,photos'
+      '&key=$apiKey');
+
+    try {
+      final response = await http.get(url);
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        final result = data['result'];
+
+        if (result != null) {
+          final location = result['geometry']['location'];
+
+          return SupportPlace(
+            placeId: result['place_id'],
+            name: result['name'],
+            address: result['formatted_address'],
+            phoneNumber: result['formatted_phone_number'],
+            latitude: location['lat'],
+            longitude: location['lng'],
+            openingHours: result['opening_hours']?['weekday_text']?.join('\n'),
+            rating: result['rating']?.toDouble(),
+            userRatingsTotal: result['user_ratings_total'],
+            website: result['website'],
+            photoUrl: result['photos'] != null && result['photos'].isNotEmpty
+              ? result['photos'][0]['photo_reference']
+              : null,
+          );
+        }
+      } else {
+        print('Erro ao buscar detalhes do local: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Exceção ao buscar detalhes do local: $e');
+    }
+
+    return null;
+  }
+}

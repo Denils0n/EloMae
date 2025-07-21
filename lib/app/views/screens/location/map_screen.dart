@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:elomae/app/view_models/map_viewmodel.dart';
+import 'package:elomae/app/views/screens/location/place_details_screen.dart';
 
 class MapScreen extends StatefulWidget {
   @override
@@ -35,11 +36,23 @@ class _MapScreenState extends State<MapScreen> {
                 position: currentLatLng,
                 infoWindow: InfoWindow(title: "Você está aqui"),
               ),
-              ...viewModel.supportPlaces.map((place) => Marker(
-                markerId: MarkerId(place.name),
-                position: LatLng(place.latitude, place.longitude),
-                infoWindow: InfoWindow(title: place.name),
-              )),
+              ...viewModel.supportPlaces.map(
+                (place) => Marker(
+                  markerId: MarkerId(place.name),
+                  position: LatLng(place.latitude, place.longitude),
+                  infoWindow: InfoWindow(
+                    title: place.name,
+                    onTap: () {
+                      // Navega para a tela de detalhes
+                       Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => PlaceDetailsScreen(place: place),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
             };
 
             return Column(
@@ -66,7 +79,7 @@ class _MapScreenState extends State<MapScreen> {
                           }
                         },
                         child: Text("Buscar"),
-                      )
+                      ),
                     ],
                   ),
                 ),
