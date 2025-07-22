@@ -3,7 +3,6 @@ import 'package:elomae/app/views/widgets/navigationbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:elomae/app/views/screens/home/program_list_screen.dart';
 
-
 class HomepageScreen extends StatelessWidget {
   const HomepageScreen({super.key});
 
@@ -12,55 +11,58 @@ class HomepageScreen extends StatelessWidget {
     String? userName = FirebaseAuth.instance.currentUser?.displayName;
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 95.0,
-        title: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                    Text('Olá, $userName!',
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 27.0),
-        ),
-                  InkWell(
-                    onTap: () {
-                      print('Clique notification');
-                    },        
-                    borderRadius: BorderRadius.circular(30),
-                    child: Container(
-                      padding:  EdgeInsets.all(7),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                         boxShadow: [
-                          BoxShadow(
-                            color: Colors.black12, 
-                            blurRadius: 9,         
-                            offset: Offset(0, 1), 
-                          )
-                         ],
-                      ),
-                      child: Icon(Icons.notifications
-                      , color: Color(0xFF8566E0),
-                      size: 30.0,
-                      ),
-                    ),
+        toolbarHeight: 90.0,
+        elevation: 0,
+        actions: [
+          Padding(
+            padding: EdgeInsets.only(right: 16.0, top: 20.0),
+            child: Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 5,
+                    offset: Offset(0, 2),
                   ),
                 ],
               ),
+              child: CircleAvatar(
+                radius: 25,
+                backgroundColor: Colors.white,
+                child: IconButton(
+                  icon: Icon(
+                    Icons.notifications,
+                    color: Color(0xFF8566E0),
+                    size: 34.0,
+                  ),
+                  onPressed: () {},
+                ),
+              ),
+            ),
           ),
+        ],
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(top:40.0, left: 30.0, right: 30.0),
+          padding: const EdgeInsets.only(left: 30.0, right: 30.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start, 
-              children: [
-                Text('Programas',
-                style: TextStyle(fontWeight: FontWeight.w400, fontSize: 20),
-                ),
-                SizedBox(height: 30), 
-                Expanded(child: ProgramListScreen()),
-              ],
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Olá, $userName!',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 27.0),
+              ),
+              SizedBox(height: 30.0),
+              Text(
+                'Programas',
+                style: TextStyle(fontWeight: FontWeight.w400, fontSize: 18),
+              ),
+              SizedBox(height: 20.0,),
+            Expanded(
+              child: ProgramListScreen(),
+          )
+            ],
           ),
         ),
       ),
