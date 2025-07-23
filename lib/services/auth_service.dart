@@ -1,5 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:lucid_validation/lucid_validation.dart';
 
 class AuthService {
   FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -13,6 +13,16 @@ class AuthService {
         .createUserWithEmailAndPassword(email: email, password: password);
 
     await userCredential.user!.updateDisplayName(name);
+
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userCredential.user!.uid)
+        .set({
+          'name': name,
+          'email': email,
+          'number': number,
+          'createdAt': FieldValue.serverTimestamp(),
+        });
   }
 
   // Login de usuário
