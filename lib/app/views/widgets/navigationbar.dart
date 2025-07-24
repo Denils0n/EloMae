@@ -45,7 +45,7 @@ class Navigationbar extends StatelessWidget {
             context.go('/');
             break;
           case 3:
-            context.go('/');
+            context.go('/profile');
             break;
         }
       },
