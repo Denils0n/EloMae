@@ -11,26 +11,14 @@ class Navigationbar extends StatelessWidget {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home), 
-          label: 'Home'
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.location_on),
-          label: 'Mapa',
-        ),
+        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+        BottomNavigationBarItem(icon: Icon(Icons.location_on), label: 'Mapa'),
         BottomNavigationBarItem(
           icon: Icon(Icons.calendar_month),
           label: 'Calendário',
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.people), 
-          label: 'Comunidade'
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person), 
-          label: 'Perfil'
-        ),
+        BottomNavigationBarItem(icon: Icon(Icons.people), label: 'Comunidade'),
+        BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Perfil'),
       ],
       currentIndex: currentIndex,
       selectedItemColor: Color(0xFF8566E0),
@@ -49,10 +37,10 @@ class Navigationbar extends StatelessWidget {
             context.go('/');
             break;
           case 3:
-            context.go('/profile');
+            context.go('/');
             break;
           case 4:
-            context.go('/');
+            context.go('/profile');
             break;
         }
       },
