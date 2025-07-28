@@ -45,7 +45,7 @@ class WelcomeScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  
+
                   SizedBox(height: 20),
                   SizedBox(
                     width: 340,
@@ -54,31 +54,16 @@ class WelcomeScreen extends StatelessWidget {
                       onPressed: () => GoRouter.of(context).push('/login'),
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(side: BorderSide(color: const Color(0xFF8566E0), width: 2), borderRadius: BorderRadius.circular(30)),
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                            color: const Color(0xFF8566E0),
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.circular(30),
+                        ),
                       ),
                       child: const Text(
                         'Entrar',
-                        style: TextStyle(
-                          color: Color(0xFF8566E0),
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  SizedBox(height: 20),
-                  SizedBox(
-                    width: 340,
-                    height: 48,
-                    child: ElevatedButton(
-                      onPressed: () => GoRouter.of(context).push('/mapa'),
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(side: BorderSide(color: const Color(0xFF8566E0), width: 2), borderRadius: BorderRadius.circular(30)),
-                      ),
-                      child: const Text(
-                        'mapa de teste',
                         style: TextStyle(
                           color: Color(0xFF8566E0),
                           fontSize: 16,

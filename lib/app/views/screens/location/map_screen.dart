@@ -99,7 +99,7 @@ class _MapScreenState extends State<MapScreen> {
             );
           },
         ),
-        bottomNavigationBar: const Navigationbar(currentIndex: 0),
+        bottomNavigationBar: const Navigationbar(currentIndex: 1),
       ),
     );
   }
