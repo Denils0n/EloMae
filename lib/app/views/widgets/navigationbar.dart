@@ -16,6 +16,10 @@ class Navigationbar extends StatelessWidget {
           label: 'Home'
         ),
         BottomNavigationBarItem(
+          icon: Icon(Icons.location_on),
+          label: 'Mapa',
+        ),
+        BottomNavigationBarItem(
           icon: Icon(Icons.calendar_month),
           label: 'Calendário',
         ),
@@ -39,13 +43,16 @@ class Navigationbar extends StatelessWidget {
             context.go('/home');
             break;
           case 1:
-            context.go('/');
+            context.go('/mapa');
             break;
           case 2:
             context.go('/');
             break;
           case 3:
             context.go('/profile');
+            break;
+          case 4:
+            context.go('/');
             break;
         }
       },
