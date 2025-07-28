@@ -35,23 +35,25 @@ class _MapScreenState extends State<MapScreen> {
                 markerId: MarkerId("me"),
                 position: currentLatLng,
                 infoWindow: InfoWindow(title: "Você está aqui"),
+                icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRose),
               ),
               ...viewModel.supportPlaces.map(
                 (place) => Marker(
-                  markerId: MarkerId(place.name),
+                  markerId: MarkerId(place.nome),
                   position: LatLng(place.latitude, place.longitude),
+                  icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueViolet),
                   infoWindow: InfoWindow(
-                    title: place.name,
-                    onTap: () {
-                      // Navega para a tela de detalhes
-                       Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) => PlaceDetailsScreen(place: place),
-                        ),
-                      );
-                    },
+                    title: place.nome,
                   ),
-                ),
+                onTap: () {
+                  // Navega para a tela de detalhes
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => PlaceDetailsScreen(place: place),
+                    ),
+                  );
+                },
+              ),
               ),
             };
 
@@ -75,7 +77,7 @@ class _MapScreenState extends State<MapScreen> {
                         onPressed: () {
                           final keyword = _searchController.text;
                           if (keyword.isNotEmpty) {
-                            viewModel.searchSupportPlaces(keyword);
+                            viewModel.fetchSupportPlacesFromFirestore();
                           }
                         },
                         child: Text("Buscar"),
