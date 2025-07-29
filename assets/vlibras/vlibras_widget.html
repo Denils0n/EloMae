@@ -16,6 +16,33 @@
   <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
   <script>
     new window.VLibras.Widget('https://vlibras.gov.br/app');
+
+    document.addEventListener('DOMContentLoaded', function () {
+      // Botão de expandir
+      const btn = document.querySelector('[vw-access-button]');
+      if (btn) {
+        btn.addEventListener('click', function () {
+          if (window.VLibrasChannel) {
+            window.VLibrasChannel.postMessage('expand');
+          }
+        });
+      }
+
+      // Observa o DOM para adicionar o listener ao botão de fechar
+      const closeBtnObserver = new MutationObserver(() => {
+        const closeBtn = document.querySelector('.vw-plugin-close-button');
+        if (closeBtn && !closeBtn._listenerAdded) {
+          closeBtn.addEventListener('click', function () {
+            if (window.VLibrasChannel) {
+              window.VLibrasChannel.postMessage('collapse');
+            }
+          });
+          closeBtn._listenerAdded = true; // Evita múltiplos listeners
+        }
+      });
+
+      closeBtnObserver.observe(document.body, { childList: true, subtree: true });
+    });
   </script>
 </body>
 </html>
