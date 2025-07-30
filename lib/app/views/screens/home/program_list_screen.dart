@@ -97,7 +97,7 @@ class _ProgramListScreenState extends State<ProgramListScreen> {
             collapsedIconColor: const Color.fromARGB(255, 77, 77, 77),
             title: Text(
               title, // O title passado pelo paramento da function, (o card clicado)
-              style: const TextStyle(fontWeight: FontWeight.w400),
+              style: TextStyle(fontWeight: FontWeight.w400, color: Colors.grey[900],),
             ),
             onExpansionChanged: (expanded) async { // É um callback (função que será chamada automaticamente) toda vez que o ExpansionTile muda de estado 
               if (expanded) {

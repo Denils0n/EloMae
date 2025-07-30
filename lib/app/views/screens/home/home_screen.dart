@@ -51,14 +51,14 @@ class HomepageScreen extends StatelessWidget {
             children: [
               Text(
                 'Olá, $userName!',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 27.0),
+                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 27.0, color:  Colors.grey[900]),
               ),
               SizedBox(height: 30.0),
               Text(
                 'Programas',
-                style: TextStyle(fontWeight: FontWeight.w400, fontSize: 18),
+                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18, color: Colors.grey[900]),
               ),
-              SizedBox(height: 20.0,),
+              SizedBox(height: 25.0,),
             Expanded(
               child: ProgramListScreen(),
           )
