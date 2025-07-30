@@ -13,16 +13,17 @@ class ProfileScreen extends StatelessWidget {
       {'icon': Icons.edit, 'title': 'Editar perfil'},
       {'icon': Icons.folder, 'title': 'Meus arquivos'},
       {'icon': Icons.event, 'title': 'Minha agenda'},
-      {'icon': Icons.security, 'title': 'Segurança'},
+      {'icon': Icons.security, 'title': 'Segurança', 'route': '/security'},
       {'icon': Icons.settings, 'title': 'Configurações'},
       ];                    
 
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 90,
-          leading: IconButton(onPressed: () {
+          leading: IconButton(
+            onPressed: () {
                   context.go('/home');
-            }, icon: Icon(Icons.arrow_back_ios_rounded, size: 30),
+            }, icon: Icon(Icons.arrow_back_ios_rounded, size: 25),
           ),
         ),
       body: SafeArea(
@@ -34,13 +35,13 @@ class ProfileScreen extends StatelessWidget {
                      child: user?.photoURL != null 
                      ? Image.network(
                       user!.photoURL!,
-                      width: 150,
-                      height: 150,
+                      width: 140,
+                      height: 140,
                       fit: BoxFit.cover,
                      )
                      : Container(
-                      width: 150,
-                      height: 150,
+                      width: 140,
+                      height: 140,
                       color: Colors.grey[300],
                       child: Icon(
                         Icons.person,
@@ -53,13 +54,13 @@ class ProfileScreen extends StatelessWidget {
                   Text(
                     user?.displayName ?? '',
                     style: TextStyle(fontWeight: FontWeight.w400,
-                    fontSize: 25, color: const Color.fromARGB(255, 31, 31, 31)),
+                    fontSize: 19, color: const Color.fromARGB(255, 31, 31, 31)),
                     ),
-                   const SizedBox(height: 30.0),
+                   const SizedBox(height: 40.0),
                     
                     Expanded(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
                      child: ListView.builder(
                           itemCount: items.length,
                           itemBuilder: (context, index) {
@@ -71,7 +72,7 @@ class ProfileScreen extends StatelessWidget {
                                 _buildListTile(
                                   icon: item['icon'] as IconData,
                                   title: item['title'] as String,
-                                  onTap: () => context.go('/'), // substitua com suas rotas corretas
+                                  onTap: () => context.go(item['route'] as String),
                                  
                                 ),
                                 if (!isLast)
@@ -96,14 +97,14 @@ class ProfileScreen extends StatelessWidget {
            Padding(
              padding: const EdgeInsets.only(right: 15),
              child: Icon(icon,
-             size: 40,
+             size: 30,
              color: const Color(0xFF8566E0)),
            ),
           
            title: 
            Text(title,
            style: TextStyle(
-            fontSize: 20
+            fontSize: 17,
            ),
            ),
           
