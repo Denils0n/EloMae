@@ -48,3 +48,6 @@ app.*.map.json
 android/app/google-services.json
 firebase.json
 lib/firebase_options.dart
+
+#Chave da API
+.env
