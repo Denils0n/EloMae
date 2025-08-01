@@ -30,7 +30,7 @@
 
       // Observa o DOM para adicionar o listener ao botão de fechar
       const closeBtnObserver = new MutationObserver(() => {
-        const closeBtn = document.querySelector('.vw-plugin-close-button');
+        const closeBtn = document.querySelector('.vpw-header-btn-close');
         if (closeBtn && !closeBtn._listenerAdded) {
           closeBtn.addEventListener('click', function () {
             if (window.VLibrasChannel) {

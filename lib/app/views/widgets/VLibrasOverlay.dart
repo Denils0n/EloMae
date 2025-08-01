@@ -36,11 +36,10 @@ class _VLibrasOverlayState extends State<VLibrasOverlay> {
     final screenHeight = MediaQuery.of(context).size.height;
     final buttonHeight = _expanded ? 350 : 60;
     final top = (screenHeight - buttonHeight) / 2;
-
     return AnimatedPositioned(
       duration: Duration(milliseconds: 300),
       top: top,
-      right: 0,
+      right: 5,
       width: _expanded ? 200 : 60,
       height: buttonHeight.toDouble(),
       child: WebViewWidget(controller: _controller),
