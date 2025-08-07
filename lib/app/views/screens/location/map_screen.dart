@@ -11,12 +11,25 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
-  final _searchController = TextEditingController();
+  String? _selectedTipo; // Armazena a opção escolhida
+
+  final List<String> _tipos = [
+    "Todos",
+    "cras",
+    "ongs",
+    "creas",
+    "prefeitura",
+    "usf",
+    "delegacia",
+    "Creche Pública",
+  ];
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<MapViewModel>(
-      create: (_) => MapViewModel()..getCurrentLocation(),
+      create: (_) => MapViewModel()
+        ..getCurrentLocation()
+        ..fetchSupportPlacesFromFirestore(), // Carrega todos no início
       child: Scaffold(
         appBar: AppBar(title: Text("Mapa de Apoio")),
         body: Consumer<MapViewModel>(
@@ -42,18 +55,15 @@ class _MapScreenState extends State<MapScreen> {
                   markerId: MarkerId(place.nome),
                   position: LatLng(place.latitude, place.longitude),
                   icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueViolet),
-                  infoWindow: InfoWindow(
-                    title: place.nome,
-                  ),
-                onTap: () {
-                  // Navega para a tela de detalhes
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => PlaceDetailsScreen(place: place),
-                    ),
-                  );
-                },
-              ),
+                  infoWindow: InfoWindow(title: place.nome),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => PlaceDetailsScreen(place: place),
+                      ),
+                    );
+                  },
+                ),
               ),
             };
 
@@ -61,28 +71,26 @@ class _MapScreenState extends State<MapScreen> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          controller: _searchController,
-                          decoration: InputDecoration(
-                            hintText: "Pesquisar: CRAS, ONG...",
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 8),
-                      ElevatedButton(
-                        onPressed: () {
-                          final keyword = _searchController.text;
-                          if (keyword.isNotEmpty) {
-                            viewModel.fetchSupportPlacesFromFirestore();
-                          }
-                        },
-                        child: Text("Buscar"),
-                      ),
-                    ],
+                  child: DropdownButton<String>(
+                    value: _selectedTipo,
+                    hint: Text("Selecione o tipo de local"),
+                    isExpanded: true,
+                    items: _tipos.map((String tipo) {
+                      return DropdownMenuItem<String>(
+                        value: tipo,
+                        child: Text(tipo),
+                      );
+                    }).toList(),
+                    onChanged: (value) {
+                      setState(() => _selectedTipo = value);
+
+                      // Se for "Todos", carrega todos
+                      if (value == "Todos") {
+                        viewModel.fetchSupportPlacesFromFirestore();
+                      } else {
+                        viewModel.fetchSupportPlacesFromFirestore(keyword: value);
+                      }
+                    },
                   ),
                 ),
                 Expanded(

@@ -23,34 +23,39 @@ class MapViewModel extends ChangeNotifier {
   }
 
   /// Busca os locais cadastrados no Firebase
-  Future<void> fetchSupportPlacesFromFirestore() async {
-    try {
-      final snapshot = await FirebaseFirestore.instance
-          .collection('locais')
-          .get();
+  Future<void> fetchSupportPlacesFromFirestore({String? keyword}) async {
+  try {
+    Query query = FirebaseFirestore.instance.collection('locais');
 
-      supportPlaces = snapshot.docs.map((doc) {
-        final data = doc.data();
-
-        return SupportPlace(
-          id: doc.id,
-          nome: data['nome'] ?? '',
-          endereco: data['endereco'] ?? '',
-          telefone: data['telefone'] ?? '',
-          latitude: data['latitude'],
-          longitude: data['longitude'],
-          horarios: data['horarios'] ?? '',
-          fotoUrl: data['fotoUrl'] ?? '',
-          servicos: data['servicos'] ?? '',
-          tipo: data['tipo'] ?? '',
-        );
-      }).toList();
-
-      notifyListeners();
-    } catch (e) {
-      print('Erro ao buscar locais do Firebase: $e');
+    if (keyword != null && keyword.isNotEmpty) {
+      query = query.where('tipo', isEqualTo: keyword);
     }
+
+    final snapshot = await query.get();
+
+    supportPlaces = snapshot.docs.map((doc) {
+      final data = doc.data() as Map<String, dynamic>;
+
+      return SupportPlace(
+        id: doc.id,
+        nome: data['nome'] ?? '',
+        endereco: data['endereco'] ?? '',
+        telefone: data['telefone'] ?? '',
+        latitude: data['latitude'],
+        longitude: data['longitude'],
+        horarios: data['horarios'] ?? '',
+        fotoUrl: data['fotoUrl'] ?? '',
+        servicos: data['servicos'] ?? '',
+        tipo: data['tipo'] ?? '',
+      );
+    }).toList();
+
+    notifyListeners();
+  } catch (e) {
+    print('Erro ao buscar locais do Firebase: $e');
   }
+}
+
 
   /// Busca os detalhes de um local pelo ID no Firebase
   Future<SupportPlace?> getPlaceById(String placeId) async {
