@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ProgramListScreen extends StatefulWidget {
   const ProgramListScreen({super.key});
@@ -8,9 +9,8 @@ class ProgramListScreen extends StatefulWidget {
 }
 
 class _ProgramListScreenState extends State<ProgramListScreen> {
-  final List<GlobalKey> _cardKeys = List.generate(8, (index) => GlobalKey()); //  Cria 8 chaves únicas (uma pra cada card)
+  final List<GlobalKey> _cardKeys = List.generate(9, (index) => GlobalKey()); //  Cria 9 chaves únicas (uma pra cada card)
   late final ScrollController _scrollController; // Um Scroll controlador que permite rolar a tela programaticamente.
-
   @override
   void initState() {
     super.initState();
@@ -32,50 +32,56 @@ class _ProgramListScreenState extends State<ProgramListScreen> {
        _buildExpansionTile(
         context,
           title: 'Programas de Transferência de Renda',
-          items: ['Bolsa Família', 'Benefício de Prestação Continuada (BPC)', 'Auxílio Gás'],
+          items: ['Bolsa Família', 'Benefício de Prestação Continuada', 'Auxílio Gás'],
            key: _cardKeys[0],
         ),
+       _buildExpansionTile(
+          context,
+          title: 'Serviços de Saúde e Assistência Social',
+          items: ['Unidades Básicas de Saúde', 'Centro de Referência de Assistência Social'],
+            key: _cardKeys[1],
+        ),  
         _buildExpansionTile(
           context,
           title: 'Programas de Apoio à Primeira Infância',
           items: ['Programa Criança Feliz', 'Rede Cegonha'],
-            key: _cardKeys[1],
+            key: _cardKeys[2],
         ),
+      _buildExpansionTile(
+          context,
+          title: 'Programas Educacionais e Profissionalizantes',
+          items: ['ProUni e FIES', 'Cursos Profissionalizantes Gratuitos'],
+            key: _cardKeys[3],
+        ),   
         _buildExpansionTile(
           context,
           title: 'Programas Habitacionais e de Infraestrutura',
           items: ['Minha Casa, Minha Vida', 'Tarifa Social de Energia Elétrica'],
-            key: _cardKeys[2],
+            key: _cardKeys[4],
         ),
         _buildExpansionTile(
           context,
           title: 'Programas de Inclusão Produtiva e Empreendedorismo',
           items: ['Auxílio Inclusão Produtiva Rural', 'Programas de Microcrédito'],  
-            key: _cardKeys[3],
-        ),
-        _buildExpansionTile(
-          context,
-          title: 'Programas Educacionais e Profissionalizantes',
-          items: ['ProUni e FIES', 'Cursos Profissionalizantes Gratuitos'],
-            key: _cardKeys[4],
-        ),
-        _buildExpansionTile(
-          context,
-          title: 'Serviços de Saúde e Assistência Social',
-          items: ['Unidades Básicas de Saúde (UBS)', 'Centro de Referência de Assistência Social (CRAS)'],
             key: _cardKeys[5],
         ),
         _buildExpansionTile(
           context,
           title: 'Medidas Protetivas e Direitos Legais',
-          items: ['Lei Maria da Penha', 'Delegacia Especializada de Atendimento à Mulher (DEAMs)'],
+          items: ['Lei Maria da Penha', 'Delegacia Especializada de Atendimento à Mulher'],
             key: _cardKeys[6],
+        ),
+           _buildExpansionTile(
+          context,
+          title: 'Programas Estaduais',
+          items: ['Mães de Pernambuco'],
+            key: _cardKeys[7],
         ),
         _buildExpansionTile(
           context,
           title: 'Outros Benefícios e Programas',
           items: ['Isenção de IPTU', 'Programa Mães do Brasil'],
-            key: _cardKeys[7],
+            key: _cardKeys[8],
         ),
       ],
     );
@@ -117,8 +123,8 @@ class _ProgramListScreenState extends State<ProgramListScreen> {
               return ListTile(
                 title: Text(item),
                 onTap: () {
-                  print('Selecionado: $item');
-                },
+                context.push('/detail_program', extra: item);
+                 },
               );
             }).toList(),
           );

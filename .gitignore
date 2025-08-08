@@ -51,3 +51,5 @@ lib/firebase_options.dart
 
 #Chave da API
 .env
+
+node_modules/
