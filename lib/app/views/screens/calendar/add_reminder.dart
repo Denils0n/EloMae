@@ -151,7 +151,7 @@ class _AddReminderScreen extends State<AddReminderScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: const Navigationbar(currentIndex: 1),
+      bottomNavigationBar: const Navigationbar(currentIndex: 2),
     );
   }
 

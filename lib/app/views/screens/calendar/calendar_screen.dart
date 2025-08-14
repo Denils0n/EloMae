@@ -44,27 +44,31 @@ class _CalendarScreen extends State<CalendarScreen> {
         scrolledUnderElevation: 0,
         surfaceTintColor: Colors.transparent,
         automaticallyImplyLeading: false,
-        toolbarHeight: 70,
+        toolbarHeight: 80,
         actions: [
           Padding(
-            padding: EdgeInsets.only(right: 20),
-            child: SizedBox(
-              width: 45,
-              height: 45,
-              child: Material(
-                color: const Color(0xfffafafa),
-                shape: const CircleBorder(),
-                elevation: 3,
-                child: InkWell(
-                  customBorder: const CircleBorder(),
-                  onTap: () => GoRouter.of(context).push('/calendar'),
-                  child: const Padding(
-                    padding: EdgeInsets.all(8),
-                    child: Icon(
-                      Icons.notifications,
-                      color: const Color(0xff8566E0),
-                    ),
+            padding: EdgeInsets.only(right: 16.0, top: 20.0),
+            child: Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 5,
+                    offset: Offset(0, 2),
                   ),
+                ],
+              ),
+              child: CircleAvatar(
+                radius: 25,
+                backgroundColor: Colors.white,
+                child: IconButton(
+                  icon: Icon(
+                    Icons.notifications,
+                    color: Color(0xFF8566E0),
+                    size: 34.0,
+                  ),
+                  onPressed: () {},
                 ),
               ),
             ),
@@ -246,7 +250,7 @@ class _CalendarScreen extends State<CalendarScreen> {
         elevation: 3,
         child: const Icon(Icons.add, color: Colors.white, size: 32),
       ),
-      bottomNavigationBar: const Navigationbar(currentIndex: 1),
+      bottomNavigationBar: const Navigationbar(currentIndex: 2),
     );
   }
 }

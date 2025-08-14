@@ -75,7 +75,7 @@ class _LoginScreen extends State<LoginScreen> {
                       ),
                       filled: true,
                       fillColor: Color(0xFFECECEC),
-                      hintText: 'Ex: marialuiza@gmail.com',
+                      hintText: 'exemplo@gmail.com',
                       hintStyle: TextStyle(
                         color: Color(0xff838383),
                         fontSize: 16,

@@ -31,7 +31,7 @@ class Navigationbar extends StatelessWidget {
             context.go('/home');
             break;
           case 1:
-            context.go('/mapa');
+            context.go('/');
             break;
           case 2:
             context.go('/calendar');
