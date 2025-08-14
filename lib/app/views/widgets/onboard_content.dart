@@ -28,7 +28,7 @@ class OnboardContent extends StatelessWidget {
         Text(
           description,
           style: Theme.of(context).textTheme.bodyMedium,
-          textAlign: TextAlign.center,
+          textAlign: TextAlign.justify,
         ),
         const Spacer(),
       ],

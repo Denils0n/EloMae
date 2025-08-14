@@ -74,10 +74,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   shape: const CircleBorder(),
                                   backgroundColor: const Color(0xFF8566E0),
                                   foregroundColor: Colors.white,
+                                  padding: EdgeInsets.zero,
                                 ),
                                 child: const Icon(
                                   Icons.arrow_forward,
                                   color: Colors.white,
+                                  size: 24,
                                 ),
                               ),
                             ),
