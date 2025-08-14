@@ -1,3 +1,8 @@
+import 'package:elomae/app/models/reminder_model.dart';
+import 'package:elomae/app/views/widgets/calendar/reminder_card.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:elomae/services/reminder_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:elomae/app/views/widgets/navigationbar.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -13,6 +18,8 @@ class CalendarScreen extends StatefulWidget {
 
 class _CalendarScreen extends State<CalendarScreen> {
   DateTime today = DateTime.now();
+  final ReminderService _reminderService = ReminderService();
+  final _auth = FirebaseAuth.instance;
 
   void _onDaySelected(DateTime day, DateTime focusedDay) {
     setState(() {
@@ -22,24 +29,68 @@ class _CalendarScreen extends State<CalendarScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final user = _auth.currentUser;
+
+    if (user == null) {
+      return const Scaffold(
+        body: Center(child: Text('Usuário não autenticado.')),
+      );
+    }
+
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xffFAFAFA),
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        surfaceTintColor: Colors.transparent,
+        automaticallyImplyLeading: false,
+        toolbarHeight: 70,
+        actions: [
+          Padding(
+            padding: EdgeInsets.only(right: 20),
+            child: SizedBox(
+              width: 45,
+              height: 45,
+              child: Material(
+                color: const Color(0xfffafafa),
+                shape: const CircleBorder(),
+                elevation: 3,
+                child: InkWell(
+                  customBorder: const CircleBorder(),
+                  onTap: () => GoRouter.of(context).push('/calendar'),
+                  child: const Padding(
+                    padding: EdgeInsets.all(8),
+                    child: Icon(
+                      Icons.notifications,
+                      color: const Color(0xff8566E0),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.only(left: 20, right: 20),
           child: Column(
             children: [
-              Text(
-                'Calendário',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xff2F2F2F),
+              Padding(
+                padding: const EdgeInsets.only(top: 10, bottom: 20),
+                child: Text(
+                  'Calendário',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xff2F2F2F),
+                  ),
                 ),
               ),
               Container(
                 padding: EdgeInsets.all(8),
                 decoration: const BoxDecoration(
-                  color: Color(0xffFFFFFF),
+                  color: Color(0xffF3EEFF),
                   borderRadius: BorderRadius.all(Radius.circular(8)),
                 ),
                 child: TableCalendar(
@@ -80,6 +131,24 @@ class _CalendarScreen extends State<CalendarScreen> {
                       ),
                     ),
                   ),
+                  calendarStyle: CalendarStyle(
+                    todayDecoration: BoxDecoration(
+                      color: Color(0xff8566E0),
+                      shape: BoxShape.circle,
+                    ),
+                    todayTextStyle: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    selectedDecoration: BoxDecoration(
+                      color: Color(0xff8566E0),
+                      shape: BoxShape.circle,
+                    ),
+                    selectedTextStyle: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                   firstDay: DateTime.utc(2025, 01, 01),
                   lastDay: DateTime(2025, 12, 31),
                   focusedDay: today,
@@ -88,37 +157,83 @@ class _CalendarScreen extends State<CalendarScreen> {
                   onDaySelected: _onDaySelected,
                 ),
               ),
-              SizedBox(
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Row(
-                    children: [
-                      Text(
-                        isSameDay(today, DateTime.now())
-                            ? 'Hoje'
-                            : DateFormat('d EEE', 'pt_BR').format(today),
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: Row(
+                  children: [
+                    Text(
+                      isSameDay(today, DateTime.now())
+                          ? 'Hoje'
+                          : DateFormat('d EEE', 'pt_BR').format(today),
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xff2F2F2F),
+                      ),
+                    ),
+                    Spacer(),
+                    TextButton(
+                      onPressed: () => GoRouter.of(context).push('/reminders'),
+                      child: Text(
+                        'Todos',
                         style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xff2F2F2F),
+                          color: Color(0xff838383),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
-                      Spacer(),
-                      TextButton(
-                        onPressed: () =>
-                          GoRouter.of(context).push('/reminders'),
-                        child: Text(
-                          'Todos',
-                          style: TextStyle(
-                            color: Color(0xff838383),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
+              ),
+              StreamBuilder<QuerySnapshot>(
+                stream: _reminderService.getReminders(user.uid),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+
+                  if (snapshot.hasError) {
+                    return Center(
+                      child: Text('Ocorreu um erro: ${snapshot.error}'),
+                    );
+                  }
+
+                  if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                    return const Center(
+                      child: Text(
+                        'Nenhum lembrete encontrado.',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    );
+                  }
+
+                  final dailyReminders = snapshot.data!.docs
+                      .map(
+                        (doc) => ReminderModel.fromMap(
+                          doc.id,
+                          doc.data() as Map<String, dynamic>,
+                        ),
+                      )
+                      .where((reminder) => isSameDay(reminder.date, today))
+                      .toList();
+
+                  if (dailyReminders.isEmpty) {
+                    return const Center(
+                      child: Text('Você não possui lembretes para esta data.'),
+                    );
+                  }
+
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: dailyReminders.length,
+                    itemBuilder: (context, index) {
+                      final reminder = dailyReminders[index];
+                      return ReminderCard(reminder: reminder);
+                    },
+                  );
+                },
               ),
             ],
           ),

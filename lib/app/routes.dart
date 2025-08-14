@@ -8,6 +8,7 @@ import 'package:elomae/app/views/screens/home/home_screen.dart';
 import 'package:elomae/app/views/screens/calendar/calendar_screen.dart';
 import 'package:elomae/app/views/screens/calendar/add_reminder.dart';
 import 'package:elomae/app/views/screens/calendar/reminder_screen.dart';
+import 'package:elomae/app/views/screens/calendar/reminders_screen.dart';
 import 'package:elomae/app/views/screens/database_screen.dart';
 
 final GoRouter routes = GoRouter(
@@ -40,8 +41,12 @@ final GoRouter routes = GoRouter(
       builder: (context, state) => const AddReminderScreen(),
     ),
     GoRoute(
-      path: '/reminders',
+      path: '/reminder',
       builder: (context, state) => const ReminderScreen(),
+    ),
+    GoRoute(
+      path: '/reminders',
+      builder: (context, state) => const RemindersScreen(),
     ),
     GoRoute(
       path: '/database',

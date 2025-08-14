@@ -31,11 +31,13 @@ class ReminderViewmodel extends ChangeNotifier {
 
   void setStartDateTime(String time) {
     startDateTime = time;
+    startTimeController.text = time;
     notifyListeners();
   }
 
   void setEndDateTime(String time) {
     endDateTime = time;
+    endTimeController.text = time;
     notifyListeners();
   }
 
@@ -81,6 +83,30 @@ class ReminderViewmodel extends ChangeNotifier {
       initialDate: selectedDate ?? DateTime.now(),
       firstDate: DateTime(2000),
       lastDate: DateTime(2100),
+
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            colorScheme: const ColorScheme.light(
+              primary: Color(0xFF8566E0),
+              onPrimary: Color(0xff838383),
+              onSurface: Color(0xff838383),
+              surface: Color(0xffF3EEFF),
+              secondary: Color(0xffF3EEFF),
+              onSecondary: Color(0xff8566E0),
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                foregroundColor: const Color(0xff8566E0),
+                textStyle: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
     );
 
     if (pickedDate != null) {

@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
       title: 'EloMãe',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Color(0xffFAFAFA)),
+        scaffoldBackgroundColor: const Color(0xffFAFAFA),
       ),
       routerDelegate: routes.routerDelegate,
       routeInformationParser: routes.routeInformationParser,

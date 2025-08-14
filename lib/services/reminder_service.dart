@@ -9,4 +9,12 @@ class ReminderService {
     data['userId'] = userId;
     await _firestore.collection('calendar_reminders').add(data);
   }
+
+  Stream<QuerySnapshot> getReminders(String userId) {
+    return _firestore
+    .collection('calendar_reminders')
+    .where('userId', isEqualTo: userId)
+    .orderBy('date', descending: false)
+    .snapshots();
+  }
 }

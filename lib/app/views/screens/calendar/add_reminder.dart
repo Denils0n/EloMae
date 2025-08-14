@@ -1,5 +1,6 @@
 import 'package:elomae/app/view_models/reminder_viewmodel.dart';
 import 'package:elomae/app/views/widgets/calendar/dropdown_hour.dart';
+import 'package:go_router/go_router.dart';
 import 'package:elomae/app/views/widgets/navigationbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -27,12 +28,36 @@ class _AddReminderScreen extends State<AddReminderScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xffFAFAFA),
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        toolbarHeight: 70,
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 20),
+                child: Material(
+                  color: const Color(0xfffafafa),
+                  shape: const CircleBorder(),
+                  elevation: 3,
+                  child: InkWell(
+                    customBorder: const CircleBorder(),
+                    onTap: () => GoRouter.of(context).push('/calendar'),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8),
+                      child: Icon(
+                        Icons.arrow_back,
+                        color: const Color(0xff8566E0),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+          ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: Form(
             key: formKey,
-            child: SingleChildScrollView(
               child: Column(
                 children: [
                   TextFormField(
@@ -123,7 +148,6 @@ class _AddReminderScreen extends State<AddReminderScreen> {
                   ),
                 ],
               ),
-            ),
           ),
         ),
       ),
