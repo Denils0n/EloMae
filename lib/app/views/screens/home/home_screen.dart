@@ -11,8 +11,12 @@ class HomepageScreen extends StatelessWidget {
     String? userName = FirebaseAuth.instance.currentUser?.displayName;
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 90.0,
+        backgroundColor: Color(0xffFAFAFA),
         elevation: 0,
+        scrolledUnderElevation: 0,
+        surfaceTintColor: Colors.transparent,
+        automaticallyImplyLeading: false,
+        toolbarHeight: 80,
         actions: [
           Padding(
             padding: EdgeInsets.only(right: 16.0, top: 20.0),
@@ -45,7 +49,7 @@ class HomepageScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(left: 30.0, right: 30.0),
+          padding: const EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
