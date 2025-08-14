@@ -6,6 +6,7 @@ class Message {
   final String text;
   final String senderId;
   final String senderName;
+  final bool isImage;
   final DateTime timestamp;
 
   Message({
@@ -13,6 +14,7 @@ class Message {
     required this.text,
     required this.senderId,
     required this.senderName,
+    this.isImage = false,
     required this.timestamp,
   }
 );
@@ -23,6 +25,7 @@ class Message {
       text: map['text'],
       senderId: map['senderId'],
       senderName: map['senderName'],
+      isImage: map['isImage'] ?? false,
       timestamp: (map['timestamp'] as Timestamp).toDate(),
     );
   }
@@ -33,6 +36,7 @@ class Message {
       'text' : text,
       'senderId' : senderId,
       'senderName' : senderName,
+      'isImage': isImage,
       'timestamp' : Timestamp.fromDate(timestamp),
     };
   }
